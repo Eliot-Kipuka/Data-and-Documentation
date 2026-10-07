@@ -1,0 +1,5 @@
+﻿category,test_n,max_additivity_error,algorithm,feature_perturbation
+Y1,714,8.58306884765625e-06,exact native TreeSHAP,tree_path_dependent
+Y2,714,1.52587890625e-05,exact native TreeSHAP,tree_path_dependent
+Y3,714,1.9073486328125e-06,exact native TreeSHAP,tree_path_dependent
+Y4,714,4.76837158203125e-06,exact native TreeSHAP,tree_path_dependent
