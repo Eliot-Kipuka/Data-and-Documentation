@@ -1,0 +1,2 @@
+﻿mean_fit_time,std_fit_time,mean_score_time,std_score_time,param_learning_rate,param_max_depth,param_n_estimators,params,split0_test_score,split1_test_score,split2_test_score,mean_test_score,std_test_score,rank_test_score
+0.36260755856831867,0.010889545856393148,0.0052255789438883466,0.0021671788114335042,0.005,3,300,"{'learning_rate': 0.005, 'max_depth': 3, 'n_estimators': 300}",-1.8865577615407991,-3.5609220323736666,-5.5393526871738672,-3.6622774936961111,1.4929684947195163,1

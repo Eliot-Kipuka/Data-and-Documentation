@@ -1,0 +1,5 @@
+﻿category,tree_method,base_score_rule,random_state,n_estimators,max_depth,learning_rate
+Y1,hist,mean of training outcome,0,500,2,0.01
+Y2,hist,mean of training outcome,0,300,3,0.01
+Y3,hist,mean of training outcome,0,300,1,0.02
+Y4,hist,mean of training outcome,0,300,3,0.0050000000000000001

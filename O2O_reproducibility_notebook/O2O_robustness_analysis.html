@@ -1,0 +1,92 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><title>O2O reproducibility supplement</title><style>body{font:16px system-ui,sans-serif;max-width:1100px;margin:40px auto;padding:0 24px;color:#202124}pre{white-space:pre-wrap;overflow-wrap:anywhere;font-size:13px;line-height:1.6}.note pre{font:16px system-ui,sans-serif;line-height:1.7}.output{background:#f5f6f7;padding:16px}details{margin:12px 0}section{margin-top:30px}a{color:#1765a5}</style><h1>O2O model reproducibility supplement</h1><p>Saved model-training outputs and independently checked numerical support. KDE is supplied in the response letter.</p><section class="note"><pre># O2O aligned reproducibility supplement
+
+The four archived notebooks are unchanged. This supplement explicitly uses histogram trees and a training-outcome mean intercept, which reproduce their saved scores and gain importance. The exact original software version is not inferred. Start Jupyter in this package directory. See README.md for data provenance and interpretation limits.
+
+Packaging note: KDE checks are supplied in the response letter. This supplement contains the unified models and numerical support. SHAP figures/results are also provided in the sibling O2O_SHAP_supplement directory.</pre></section><details><summary>Executable code</summary><pre>from pathlib import Path
+import sys
+root=Path.cwd()
+if not (root/&#x27;code&#x27;/&#x27;run_analysis.py&#x27;).exists():
+    raise FileNotFoundError(&#x27;Start Jupyter in the package root&#x27;)
+sys.path.insert(0,str(root/&#x27;code&#x27;))
+from run_analysis import *
+fine,coarse=prepare()</pre></details><pre class="output">3570 fine grids; 1648 coarse grids; store totals conserved. X17 source aligned.
+</pre><section class="note"><pre># 600 m original model outputs and common-test OLS comparison
+
+The same 2856 training and 714 held-out test rows are used for both models. Gain importance is computed from the original fitted XGBoost model, not from five-fold averages. Archived rounded outputs are checked numerically.</pre></section><details><summary>Executable code</summary><pre>models=baseline(fine)</pre></details><pre class="output">scale category    model  train_n  test_n        r2        mse      rmse       mae
+ 600m       Y1  XGBoost     2856     714  0.416948   2.594451  1.610730  0.950073
+ 600m       Y1      OLS     2856     714  0.404010   2.652022  1.628503  1.023544
+ 600m       Y2  XGBoost     2856     714  0.537052   9.731078  3.119468  1.618743
+ 600m       Y2      OLS     2856     714  0.484071  10.844731  3.293134  1.708256
+ 600m       Y3  XGBoost     2856     714  0.093774  20.246551  4.499617  1.396384
+ 600m       Y3      OLS     2856     714  0.149468  19.002248  4.359157  1.407323
+ 600m       Y4  XGBoost     2856     714  0.126184  13.961261  3.736477  0.777460
+ 600m       Y4      OLS     2856     714  0.089664  14.544748  3.813758  0.784176
+</pre><section class="note"><pre># Supplementary exact TreeSHAP
+
+Exact native XGBoost TreeSHAP is used without an interventional background dataset. It exports 714 rows per category, base values, predictions, mean absolute values, LOWESS curves and figures. Additivity is checked. These exports do not overwrite or establish pixelwise identity with the original manuscript figures.
+
+Old statsmodels robust LOWESS can produce nonfinite curves on repeated zero values. A disclosed zero-iteration smoothing fallback is used when fewer than 80% of points are finite; the iteration count is exported. Raw TreeSHAP values are unchanged. The original images are preserved separately.</pre></section><details><summary>Executable code</summary><pre>shap_analysis(fine,models)</pre></details><pre class="output">category  test_n  max_additivity_error              algorithm feature_perturbation
+      Y1     714              0.000009  exact native TreeSHAP  tree_path_dependent
+      Y2     714              0.000015  exact native TreeSHAP  tree_path_dependent
+      Y3     714              0.000002  exact native TreeSHAP  tree_path_dependent
+      Y4     714              0.000005  exact native TreeSHAP  tree_path_dependent
+</pre><section class="note"><pre># 1200 m sensitivity and random five-fold stability
+
+Only the source X17 value at FID 1690 is corrected substantively, from zero to the final 600 m value 472.222222. Existing source precision and aggregation rules are retained elsewhere. Counts are summed; density indicators are area weighted; demographic indicators are population weighted. Rent, diversity and distance are existing-subcell summaries rather than recalculated POI metrics. The coarse sample is selected from the full source fishnet, not only the 3570 fine-model rows. Fold SDs are not confidence intervals.</pre></section><details><summary>Executable code</summary><pre>sensitivity(fine,coarse)</pre></details><pre class="output"> scale category    model   r2_mean    r2_std   mse_mean    mse_std  rmse_mean  rmse_std  mae_mean   mae_std
+ 1200m       Y1      OLS  0.511920  0.109494  23.368607  12.558081   4.697596  1.275344  2.044701  0.117225
+ 1200m       Y1  XGBoost  0.497115  0.099683  24.328452  11.894900   4.793431  1.299744  1.913164  0.231668
+ 1200m       Y2      OLS  0.677416  0.058293  42.262031  13.396548   6.417745  1.158979  2.976876  0.246709
+ 1200m       Y2  XGBoost  0.652388  0.069691  46.431181  16.711785   6.695660  1.413910  2.940680  0.274210
+ 1200m       Y3      OLS  0.032590  0.329777  56.191227  36.014195   7.126025  2.600718  2.742627  0.328786
+ 1200m       Y3  XGBoost  0.056380  0.249237  58.053453  39.693202   7.179937  2.850867  2.497530  0.506233
+ 1200m       Y4      OLS  0.260971  0.254759  14.938561  18.252010   3.420354  2.012380  1.224927  0.205980
+ 1200m       Y4  XGBoost  0.332891  0.122574  15.539335  20.521941   3.401803  2.226846  1.230820  0.310882
+  600m       Y1      OLS  0.362812  0.044709   5.522595   1.994644   2.314986  0.451988  1.142344  0.073006
+  600m       Y1  XGBoost  0.371572  0.079275   5.444400   2.026769   2.296340  0.462632  1.087709  0.085216
+  600m       Y2      OLS  0.439255  0.063644  13.897921   7.827894   3.631732  0.941038  1.793578  0.115300
+  600m       Y2  XGBoost  0.445782  0.097742  13.958038   8.711978   3.617723  1.042905  1.774151  0.146596
+  600m       Y3      OLS  0.102313  0.044950  15.257321   5.814769   3.839272  0.804139  1.415784  0.119214
+  600m       Y3  XGBoost  0.067120  0.039948  15.863737   6.049903   3.914636  0.821100  1.382227  0.136485
+  600m       Y4      OLS  0.147708  0.080818   5.721615   5.283665   2.208261  1.027860  0.746685  0.067251
+  600m       Y4  XGBoost -0.013697  0.442375   7.109863   6.458705   2.418189  1.256097  0.757647  0.136613
+category              top5_600m             top5_1200m  overlap
+      Y1   X1, X6, X17, X10, X7  X1, X14, X6, X17, X10        4
+      Y2   X1, X17, X4, X6, X10  X1, X17, X18, X6, X10        4
+      Y3   X14, X18, X1, X6, X8  X1, X18, X6, X14, X17        4
+      Y4  X6, X1, X18, X17, X22   X3, X17, X14, X1, X6        3
+</pre><section class="note"><pre># 3 km and 5 km spatial-block validation of the 600 m model
+
+These are block sizes for validation, not new 3 km or 5 km count models. The supplied historical fold map is retained so sklearn tie handling cannot change the experiment. Every block is confined to a single fold. Per-fold predictions and metrics are exported.</pre></section><details><summary>Executable code</summary><pre>spatial(fine)</pre></details><pre class="output"> block_size category   r2_mean    r2_std   mse_mean    mse_std  rmse_mean  rmse_std  mae_mean   mae_std
+       3000       Y1  0.326265  0.044222   5.848679   3.885622   2.328390  0.730820  1.112144  0.129229
+       3000       Y2  0.430492  0.084404  14.235998   8.962261   3.635776  1.127570  1.801697  0.201518
+       3000       Y3  0.061855  0.027771  15.926056   6.802920   3.905510  0.917228  1.385886  0.111726
+       3000       Y4  0.020913  0.199499   6.354331   5.788069   2.266273  1.234068  0.746482  0.135150
+       5000       Y1  0.267682  0.117275   5.858494   5.395367   2.264301  0.956187  1.114221  0.271489
+       5000       Y2  0.347260  0.069788  15.329357   4.815218   3.876182  0.617022  1.834572  0.253314
+       5000       Y3  0.050137  0.035142  15.851195  11.601998   3.783938  1.384290  1.381254  0.236429
+       5000       Y4  0.122403  0.094091   5.885751   7.702650   2.103868  1.350690  0.756411  0.168123
+</pre><section class="note"><pre># Original parameter searches
+
+The original candidate grids, 80/20 split and three-fold search are preserved. The training-outcome mean intercept is recalculated inside every training fold; test labels are not used. Searches are optional when rerunning the standalone script but executed here.</pre></section><details><summary>Executable code</summary><pre>search_original()</pre></details><pre class="output">category  best_cv_negative_mse  learning_rate  max_depth  n_estimators        r2        mse      rmse       mae
+      Y1             -6.215891          0.010          2           500  0.416948   2.594451  1.610730  0.950073
+      Y2            -14.409048          0.010          3           300  0.537052   9.731078  3.119468  1.618743
+      Y3            -14.457383          0.020          1           300  0.093774  20.246551  4.499617  1.396384
+      Y4             -3.662277          0.005          3           300  0.126184  13.961261  3.736477  0.777460
+</pre><section class="note"><pre># Execution environment
+
+The environment below is the environment used for this aligned supplement. The historical original notebook environment was not fully recovered.</pre></section><details><summary>Executable code</summary><pre>print(environment())</pre></details><pre class="output">{&#x27;python&#x27;: &#x27;3.7.4&#x27;, &#x27;numpy&#x27;: &#x27;1.16.5&#x27;, &#x27;pandas&#x27;: &#x27;0.25.1&#x27;, &#x27;xgboost&#x27;: &#x27;1.6.2&#x27;, &#x27;sklearn&#x27;: &#x27;0.21.3&#x27;, &#x27;scipy&#x27;: &#x27;1.3.1&#x27;, &#x27;matplotlib&#x27;: &#x27;3.1.1&#x27;, &#x27;statsmodels&#x27;: &#x27;0.10.1&#x27;}
+</pre><section class="note"><pre># Independent packaging verification
+The following cell reads and checks the independent audit. Model JSON inference, a centered OLS refit, saved predictions, data alignment, SHAP additivity and fold summaries were independently checked. Historical model-training cells above retain their recorded execution. KDE is supplied in the response letter.</pre></section><details><summary>Executable code</summary><pre>import json
+from pathlib import Path
+checks=json.loads((Path(&#x27;results&#x27;)/&#x27;package_validation_status.json&#x27;).read_text())
+assert checks[&#x27;success&#x27;]
+print(json.dumps(checks,indent=2))
+</pre></details><pre class="output">{
+  &quot;success&quot;: true,
+  &quot;checks&quot;: 421,
+  &quot;models_retrained&quot;: false,
+  &quot;OLS_independently_refitted&quot;: true,
+  &quot;XGBoost_JSON_inference_checked&quot;: true,
+  &quot;KDE_excluded&quot;: true
+}
+</pre></html>

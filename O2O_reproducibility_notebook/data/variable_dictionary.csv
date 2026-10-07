@@ -1,0 +1,18 @@
+﻿data_field,manuscript_display_field,variable,group
+X1,X1,Population Density,Population characteristics
+X2,X2,Income Level,Population characteristics
+X3,X3,Education Level,Population characteristics
+X4,X4,Youth Population,Population characteristics
+X6,X5,Express outlets density,Logistics and transportation
+X7,X6,High-traffic road density,Logistics and transportation
+X8,X7,Low-traffic road density,Logistics and transportation
+X19,X8,Distance to Public Transit,Logistics and transportation
+X10,X9,Commercial Diversity,Service environment
+X14,X10,Retail Space Rent,Service environment
+X17,X11,Density of Cultural and Leisure Facilities,Service environment
+X18,X12,Office Density,Service environment
+X22,X13,Distance to Shopping Mall,Service environment
+Y1,Y1,HER shop count per grid,Outcome
+Y2,Y2,HSR shop count per grid,Outcome
+Y3,Y3,LER shop count per grid,Outcome
+Y4,Y4,LSR shop count per grid,Outcome

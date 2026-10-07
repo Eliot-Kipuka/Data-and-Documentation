@@ -1,0 +1,14 @@
+﻿Category,Independent Variables,HER_percent,HER_rank,HSR_percent,HSR_rank,LER_percent,LER_rank,LSR_percent,LSR_rank
+Demand side: Population characteristics,X1: Population Density,35.47%,1,31.27%,1,13.66%,3,11.50%,3
+,X2: Income Level,3.94%,9,1.83%,12,0.00%,10,7.14%,7
+,X3: Education Level,3.15%,10,20.76%,2,6.45%,7,0.00%,13
+,X4: Youth Population,1.36%,12,3.75%,9,0.00%,10,9.64%,4
+Supply side: Logistics and transportation,X5: Express outlets density,10.47%,2,6.20%,4,13.17%,4,6.51%,8
+,X6: High-traffic road density,6.92%,7,1.88%,11,0.00%,10,8.97%,5
+,X7: Low-traffic road density,0.00%,13,1.16%,13,8.14%,5,3.15%,12
+,X8: Distance to Public Transit,1.44%,11,4.81%,6,3.38%,9,4.85%,10
+Supply side: Service environment,X9: Commercial Diversity,8.37%,4,4.42%,8,0.00%,10,7.16%,6
+,X10: Retail Space Rent,8.49%,3,2.76%,10,20.00%,2,4.25%,11
+,X11: Density of Cultural and Leisure Facilities,7.98%,6,11.15%,3,7.41%,6,15.71%,1
+,X12: Office Density,8.06%,5,5.52%,5,22.89%,1,6.39%,9
+,X13: Distance to Shopping Mall,4.36%,8,4.50%,7,4.89%,8,14.74%,2

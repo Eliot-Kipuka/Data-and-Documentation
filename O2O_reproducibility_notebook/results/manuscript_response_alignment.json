@@ -1,0 +1,25 @@
+{
+  "manuscript_sha256": "e789c76d3caaca75e3cd9f7b2b9915be963cbe2d917ac8928d863f1d0a38cb0d",
+  "response_sha256": "fcca87d0fdb87131eaa5055e6f5ba0106d93e298bff1313918983434bd6166e5",
+  "table3_metrics_match": true,
+  "table4_all_52_percentages_and_ranks_match": true,
+  "original_notebooks_unchanged": true,
+  "random_fivefold_r2": [
+    0.372,
+    0.446,
+    0.067,
+    -0.014
+  ],
+  "spatial_3000m_r2": [
+    0.326,
+    0.43,
+    0.062,
+    0.021
+  ],
+  "spatial_5000m_r2": [
+    0.268,
+    0.347,
+    0.05,
+    0.122
+  ]
+}

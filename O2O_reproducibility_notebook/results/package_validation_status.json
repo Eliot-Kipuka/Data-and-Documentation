@@ -1,0 +1,8 @@
+{
+  "success": true,
+  "checks": 421,
+  "models_retrained": false,
+  "OLS_independently_refitted": true,
+  "XGBoost_JSON_inference_checked": true,
+  "KDE_excluded": true
+}
