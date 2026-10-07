@@ -1,0 +1,22 @@
+[
+  {
+    "layer": "grid_600m_model",
+    "attributes_match": true,
+    "geometry_bytes_match": true
+  },
+  {
+    "layer": "grid_1200m_model",
+    "attributes_match": true,
+    "geometry_bytes_match": true
+  },
+  {
+    "layer": "cv_blocks_3000m",
+    "attributes_match": true,
+    "geometry_bytes_match": true
+  },
+  {
+    "layer": "cv_blocks_5000m",
+    "attributes_match": true,
+    "geometry_bytes_match": true
+  }
+]
